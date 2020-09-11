@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- MBG 运行环境 -->
+    <!-- targetRuntime: 指定使用哪种方式生成 CRUD 方法 -->
+    <!-- mybatis 有4种方式，其中介绍两种：
+           1. MyBatis3 支持动态的 CRUD
+           2. MyBatis3Simple 生成简单的 CRUD -->
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+
+        <!-- 指定相关的注解 -->
+        <commentGenerator>
+            <!-- 取消所有注释 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!-- 指定如何连接数据库 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/fire_brigade"
+                        userId="root" password="123456">
+        </jdbcConnection>
+
+        <!-- java类型解析器 -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!-- 指定 javaBean 的生成策略 -->
+        <!-- 属性： targetPackage：目标包名 targetProject：目标工程 -->
+        <!-- targetPackage：只需填写包名即可 -->
+        <!-- targetProject：无论文件的存放位置是否在一个地方，其相对的是整个项目的文件目录 -->
+        <javaModelGenerator
+                targetPackage="com.zgxf.fireman.bean" targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!-- sql 映射生成策略 -->
+        <sqlMapGenerator targetPackage="static.mybatis.mapper"
+                         targetProject="./src/main/resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <!-- 指定 mapper 接口所在的位置 -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.zgxf.fireman.mapper" targetProject=".\src\main\java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <!-- 对应数据表 -->
+        <table tableName="grade_career" domainObjectName="GradeCareer"></table>
+        <table tableName="grade_history" domainObjectName="GradeHistory"></table>
+        <table tableName="grade_option" domainObjectName="GradeOption"></table>
+        <table tableName="grade_qlist" domainObjectName="GradeQlist"></table>
+        <table tableName="grade_question" domainObjectName="GradeQuestion"></table>
+        <table tableName="grade_tier" domainObjectName="GradeTier"></table>
+        <table tableName="grade_user" domainObjectName="GradeUser"></table>
+
+    </context>
+</generatorConfiguration>
