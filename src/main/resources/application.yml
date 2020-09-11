@@ -6,7 +6,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
 
 server:
-  port: 8644
+  port: 8058
 
 mybatis:
   mapper-locations: classpath:/static/mybatis/mapper/*.xml
