@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zgxf.fireman.mapper.GradeHistoryMapper">
+  <resultMap id="BaseResultMap" type="com.zgxf.fireman.bean.GradeHistory">
+    <id column="hid" jdbcType="INTEGER" property="hid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="write_time" jdbcType="VARCHAR" property="writeTime" />
+    <result column="zfjl_score" jdbcType="INTEGER" property="zfjlScore" />
+    <result column="rcyw_score" jdbcType="INTEGER" property="rcywScore" />
+    <result column="zznl_score" jdbcType="INTEGER" property="zznlScore" />
+    <result column="gztd_score" jdbcType="INTEGER" property="gztdScore" />
+    <result column="zxcy_score" jdbcType="INTEGER" property="zxcyScore" />
+    <result column="gtjl_score" jdbcType="INTEGER" property="gtjlScore" />
+    <result column="zwts_score" jdbcType="INTEGER" property="zwtsScore" />
+    <result column="sum_score" jdbcType="INTEGER" property="sumScore" />
+    <result column="writer_id" jdbcType="INTEGER" property="writerId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zgxf.fireman.bean.GradeHistory">
+    <result column="score_content" jdbcType="LONGVARCHAR" property="scoreContent" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    hid, uid, write_time, zfjl_score, rcyw_score, zznl_score, gztd_score, zxcy_score, 
+    gtjl_score, zwts_score, sum_score, writer_id
+  </sql>
+  <sql id="Blob_Column_List">
+    score_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.zgxf.fireman.bean.example.GradeHistoryExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from grade_history
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.zgxf.fireman.bean.example.GradeHistoryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from grade_history
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from grade_history
+    where hid = #{hid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from grade_history
+    where hid = #{hid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zgxf.fireman.bean.example.GradeHistoryExample">
+    delete from grade_history
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zgxf.fireman.bean.GradeHistory">
+    insert into grade_history (hid, uid, write_time, 
+      zfjl_score, rcyw_score, zznl_score, 
+      gztd_score, zxcy_score, gtjl_score, 
+      zwts_score, sum_score, writer_id, 
+      score_content)
+    values (#{hid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{writeTime,jdbcType=VARCHAR}, 
+      #{zfjlScore,jdbcType=INTEGER}, #{rcywScore,jdbcType=INTEGER}, #{zznlScore,jdbcType=INTEGER}, 
+      #{gztdScore,jdbcType=INTEGER}, #{zxcyScore,jdbcType=INTEGER}, #{gtjlScore,jdbcType=INTEGER}, 
+      #{zwtsScore,jdbcType=INTEGER}, #{sumScore,jdbcType=INTEGER}, #{writerId,jdbcType=INTEGER}, 
+      #{scoreContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zgxf.fireman.bean.GradeHistory">
+    insert into grade_history
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="hid != null">
+        hid,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="writeTime != null">
+        write_time,
+      </if>
+      <if test="zfjlScore != null">
+        zfjl_score,
+      </if>
+      <if test="rcywScore != null">
+        rcyw_score,
+      </if>
+      <if test="zznlScore != null">
+        zznl_score,
+      </if>
+      <if test="gztdScore != null">
+        gztd_score,
+      </if>
+      <if test="zxcyScore != null">
+        zxcy_score,
+      </if>
+      <if test="gtjlScore != null">
+        gtjl_score,
+      </if>
+      <if test="zwtsScore != null">
+        zwts_score,
+      </if>
+      <if test="sumScore != null">
+        sum_score,
+      </if>
+      <if test="writerId != null">
+        writer_id,
+      </if>
+      <if test="scoreContent != null">
+        score_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="hid != null">
+        #{hid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="writeTime != null">
+        #{writeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="zfjlScore != null">
+        #{zfjlScore,jdbcType=INTEGER},
+      </if>
+      <if test="rcywScore != null">
+        #{rcywScore,jdbcType=INTEGER},
+      </if>
+      <if test="zznlScore != null">
+        #{zznlScore,jdbcType=INTEGER},
+      </if>
+      <if test="gztdScore != null">
+        #{gztdScore,jdbcType=INTEGER},
+      </if>
+      <if test="zxcyScore != null">
+        #{zxcyScore,jdbcType=INTEGER},
+      </if>
+      <if test="gtjlScore != null">
+        #{gtjlScore,jdbcType=INTEGER},
+      </if>
+      <if test="zwtsScore != null">
+        #{zwtsScore,jdbcType=INTEGER},
+      </if>
+      <if test="sumScore != null">
+        #{sumScore,jdbcType=INTEGER},
+      </if>
+      <if test="writerId != null">
+        #{writerId,jdbcType=INTEGER},
+      </if>
+      <if test="scoreContent != null">
+        #{scoreContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zgxf.fireman.bean.example.GradeHistoryExample" resultType="java.lang.Long">
+    select count(*) from grade_history
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update grade_history
+    <set>
+      <if test="record.hid != null">
+        hid = #{record.hid,jdbcType=INTEGER},
+      </if>
+      <if test="record.uid != null">
+        uid = #{record.uid,jdbcType=INTEGER},
+      </if>
+      <if test="record.writeTime != null">
+        write_time = #{record.writeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zfjlScore != null">
+        zfjl_score = #{record.zfjlScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.rcywScore != null">
+        rcyw_score = #{record.rcywScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.zznlScore != null">
+        zznl_score = #{record.zznlScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.gztdScore != null">
+        gztd_score = #{record.gztdScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.zxcyScore != null">
+        zxcy_score = #{record.zxcyScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.gtjlScore != null">
+        gtjl_score = #{record.gtjlScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.zwtsScore != null">
+        zwts_score = #{record.zwtsScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.sumScore != null">
+        sum_score = #{record.sumScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.writerId != null">
+        writer_id = #{record.writerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.scoreContent != null">
+        score_content = #{record.scoreContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update grade_history
+    set hid = #{record.hid,jdbcType=INTEGER},
+      uid = #{record.uid,jdbcType=INTEGER},
+      write_time = #{record.writeTime,jdbcType=VARCHAR},
+      zfjl_score = #{record.zfjlScore,jdbcType=INTEGER},
+      rcyw_score = #{record.rcywScore,jdbcType=INTEGER},
+      zznl_score = #{record.zznlScore,jdbcType=INTEGER},
+      gztd_score = #{record.gztdScore,jdbcType=INTEGER},
+      zxcy_score = #{record.zxcyScore,jdbcType=INTEGER},
+      gtjl_score = #{record.gtjlScore,jdbcType=INTEGER},
+      zwts_score = #{record.zwtsScore,jdbcType=INTEGER},
+      sum_score = #{record.sumScore,jdbcType=INTEGER},
+      writer_id = #{record.writerId,jdbcType=INTEGER},
+      score_content = #{record.scoreContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update grade_history
+    set hid = #{record.hid,jdbcType=INTEGER},
+      uid = #{record.uid,jdbcType=INTEGER},
+      write_time = #{record.writeTime,jdbcType=VARCHAR},
+      zfjl_score = #{record.zfjlScore,jdbcType=INTEGER},
+      rcyw_score = #{record.rcywScore,jdbcType=INTEGER},
+      zznl_score = #{record.zznlScore,jdbcType=INTEGER},
+      gztd_score = #{record.gztdScore,jdbcType=INTEGER},
+      zxcy_score = #{record.zxcyScore,jdbcType=INTEGER},
+      gtjl_score = #{record.gtjlScore,jdbcType=INTEGER},
+      zwts_score = #{record.zwtsScore,jdbcType=INTEGER},
+      sum_score = #{record.sumScore,jdbcType=INTEGER},
+      writer_id = #{record.writerId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zgxf.fireman.bean.GradeHistory">
+    update grade_history
+    <set>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="writeTime != null">
+        write_time = #{writeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="zfjlScore != null">
+        zfjl_score = #{zfjlScore,jdbcType=INTEGER},
+      </if>
+      <if test="rcywScore != null">
+        rcyw_score = #{rcywScore,jdbcType=INTEGER},
+      </if>
+      <if test="zznlScore != null">
+        zznl_score = #{zznlScore,jdbcType=INTEGER},
+      </if>
+      <if test="gztdScore != null">
+        gztd_score = #{gztdScore,jdbcType=INTEGER},
+      </if>
+      <if test="zxcyScore != null">
+        zxcy_score = #{zxcyScore,jdbcType=INTEGER},
+      </if>
+      <if test="gtjlScore != null">
+        gtjl_score = #{gtjlScore,jdbcType=INTEGER},
+      </if>
+      <if test="zwtsScore != null">
+        zwts_score = #{zwtsScore,jdbcType=INTEGER},
+      </if>
+      <if test="sumScore != null">
+        sum_score = #{sumScore,jdbcType=INTEGER},
+      </if>
+      <if test="writerId != null">
+        writer_id = #{writerId,jdbcType=INTEGER},
+      </if>
+      <if test="scoreContent != null">
+        score_content = #{scoreContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where hid = #{hid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zgxf.fireman.bean.GradeHistory">
+    update grade_history
+    set uid = #{uid,jdbcType=INTEGER},
+      write_time = #{writeTime,jdbcType=VARCHAR},
+      zfjl_score = #{zfjlScore,jdbcType=INTEGER},
+      rcyw_score = #{rcywScore,jdbcType=INTEGER},
+      zznl_score = #{zznlScore,jdbcType=INTEGER},
+      gztd_score = #{gztdScore,jdbcType=INTEGER},
+      zxcy_score = #{zxcyScore,jdbcType=INTEGER},
+      gtjl_score = #{gtjlScore,jdbcType=INTEGER},
+      zwts_score = #{zwtsScore,jdbcType=INTEGER},
+      sum_score = #{sumScore,jdbcType=INTEGER},
+      writer_id = #{writerId,jdbcType=INTEGER},
+      score_content = #{scoreContent,jdbcType=LONGVARCHAR}
+    where hid = #{hid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zgxf.fireman.bean.GradeHistory">
+    update grade_history
+    set uid = #{uid,jdbcType=INTEGER},
+      write_time = #{writeTime,jdbcType=VARCHAR},
+      zfjl_score = #{zfjlScore,jdbcType=INTEGER},
+      rcyw_score = #{rcywScore,jdbcType=INTEGER},
+      zznl_score = #{zznlScore,jdbcType=INTEGER},
+      gztd_score = #{gztdScore,jdbcType=INTEGER},
+      zxcy_score = #{zxcyScore,jdbcType=INTEGER},
+      gtjl_score = #{gtjlScore,jdbcType=INTEGER},
+      zwts_score = #{zwtsScore,jdbcType=INTEGER},
+      sum_score = #{sumScore,jdbcType=INTEGER},
+      writer_id = #{writerId,jdbcType=INTEGER}
+    where hid = #{hid,jdbcType=INTEGER}
+  </update>
+</mapper>
